@@ -9,6 +9,7 @@ import { User, LoginCredentials, SignupData } from "../models/user.model";
 export class AuthService {
   currentUser = signal<User | null>(null);
   isLoading = signal<boolean>(false);
+  isAuthReady = signal<boolean>(false);
 
   constructor(private supabase: SupabaseService, private router: Router) {
     this.initializeAuth();
@@ -29,6 +30,7 @@ export class AuthService {
         console.error("Error initializing auth:", error);
       } finally {
         this.isLoading.set(false);
+        this.isAuthReady.set(true); // ✅ Mark initialization as done
       }
     })();
 
