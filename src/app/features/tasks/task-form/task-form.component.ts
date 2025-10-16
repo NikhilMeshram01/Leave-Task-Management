@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { TaskService } from '../../../core/services/task.service';
-import { ToastService } from '../../../core/services/toast.service';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from "@angular/forms";
+import { TaskService } from "../../../core/services/task.service";
+import { ToastService } from "../../../core/services/toast.service";
 
 @Component({
-  selector: 'app-task-form',
+  selector: "app-task-form",
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
@@ -20,11 +25,7 @@ import { ToastService } from '../../../core/services/toast.service';
             placeholder="Task title"
             class="task-input"
           />
-          <input
-            type="date"
-            formControlName="due_date"
-            class="date-input"
-          />
+          <input type="date" formControlName="due_date" class="date-input" />
           <button type="submit" [disabled]="taskForm.invalid" class="btn-add">
             Add Task
           </button>
@@ -39,78 +40,80 @@ import { ToastService } from '../../../core/services/toast.service';
       </form>
     </div>
   `,
-  styles: [`
-    .form-container {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 24px;
-    }
+  styles: [
+    `
+      .form-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+      }
 
-    h3 {
-      margin: 0 0 16px 0;
-      font-size: 18px;
-      color: #333;
-    }
+      h3 {
+        margin: 0 0 16px 0;
+        font-size: 18px;
+        color: #333;
+      }
 
-    .form-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+      .form-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
 
-    .task-input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-    }
+      .task-input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+      }
 
-    .date-input {
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-    }
+      .date-input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+      }
 
-    .description-input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-      resize: vertical;
-    }
+      .description-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        resize: vertical;
+      }
 
-    .task-input:focus,
-    .date-input:focus,
-    .description-input:focus {
-      outline: none;
-      border-color: #667eea;
-    }
+      .task-input:focus,
+      .date-input:focus,
+      .description-input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
 
-    .btn-add {
-      padding: 10px 20px;
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
+      .btn-add {
+        padding: 10px 20px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
 
-    .btn-add:hover:not(:disabled) {
-      background: #5568d3;
-    }
+      .btn-add:hover:not(:disabled) {
+        background: #5568d3;
+      }
 
-    .btn-add:disabled {
-      background: #a5b4fc;
-      cursor: not-allowed;
-    }
-  `]
+      .btn-add:disabled {
+        background: #a5b4fc;
+        cursor: not-allowed;
+      }
+    `,
+  ],
 })
 export class TaskFormComponent {
   taskForm: FormGroup;
@@ -121,9 +124,9 @@ export class TaskFormComponent {
     private toastService: ToastService
   ) {
     this.taskForm = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      due_date: [null]
+      title: ["", Validators.required],
+      description: [""],
+      due_date: [null],
     });
   }
 
@@ -132,10 +135,10 @@ export class TaskFormComponent {
 
     try {
       await this.taskService.createTask(this.taskForm.value);
-      this.toastService.showSuccess('Task created successfully!');
+      this.toastService.showSuccess("Task created successfully!");
       this.taskForm.reset();
-    } catch (error) {
-      this.toastService.showError('Failed to create task');
+    } catch (error: any) {
+      this.toastService.showError("Failed to create task");
     }
   }
 }
