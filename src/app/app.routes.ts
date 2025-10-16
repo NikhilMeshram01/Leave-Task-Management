@@ -3,6 +3,7 @@ import { authGuard } from "./core/guards/auth.guard";
 import { LoginComponent } from "./features/auth/login/login.component";
 import { SignupComponent } from "./features/auth/signup/signup.component";
 import { LayoutComponent } from "./shared/components/layout/layout.component";
+import { roleGuard } from "./core/guards/role.guard";
 
 export const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -11,10 +12,11 @@ export const routes: Routes = [
   {
     path: "",
     component: LayoutComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: "dashboard",
+        canActivate: [roleGuard],
         loadComponent: () =>
           import("./features/dashboard/dashboard.component").then(
             (m) => m.DashboardComponent

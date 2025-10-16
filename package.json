@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build"
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "jest"
   },
   "dependencies": {
     "@angular/animations": "^20.0.0",
@@ -18,13 +20,22 @@
     "@angular/router": "^20.0.0",
     "@supabase/supabase-js": "^2.58.0",
     "rxjs": "^7.8.1",
-    "tslib": "^2.5.0",
-    "zone.js": "~0.15.0"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@angular/build": "^20.0.0",
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
-    "typescript": "^5.8.2"
+    "@types/jest": "^29.5.14",
+    "@types/node": "^24.8.0",
+    "esbuild": "^0.25.11",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-preset-angular": "^15.0.2",
+    "platform-browser": "^0.0.1-security",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "zone.js": "^0.13.3"
   }
 }
