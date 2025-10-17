@@ -18,12 +18,33 @@ export class LeaveService {
   // done
   async loadLeaves() {
     this.isLoading.set(true);
-
+    console.log("loadLeaves");
     try {
-      const { data, error } = await this.supabase.client
+      const user = this.authService.currentUser();
+      console.log("user from loadLeaves", user);
+      if (!user) throw new Error("User not logged in");
+
+      let query = this.supabase.client
         .from("leaves")
-        .select("*")
+        .select(
+          `
+        *,
+        profiles (
+          full_name
+        )
+      `
+        )
         .order("created_at", { ascending: false });
+
+      // ✅ Non-admin users see only their own leaves
+      if (user.role !== "admin") {
+        query = query.eq("user_id", user.id);
+      }
+
+      const { data, error } = await query;
+
+      console.log("data from loadLeaves", data);
+      console.log("error from loadLeaves", error);
 
       if (error) throw error;
 

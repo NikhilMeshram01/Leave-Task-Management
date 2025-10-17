@@ -8,6 +8,7 @@ export interface Leave {
   status: "pending" | "approved" | "rejected";
   created_at: string;
   updated_at: string;
+  profile?: { full_name: string };
 }
 
 export interface CreateLeaveDto {

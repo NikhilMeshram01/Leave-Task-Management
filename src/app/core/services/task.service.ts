@@ -25,12 +25,16 @@ export class TaskService {
   // done
   async loadTasks() {
     this.isLoading.set(true);
+    console.log("loadTasks");
 
     try {
       const { data, error } = await this.supabase.client
         .from("tasks")
         .select("*")
         .order("created_at", { ascending: false });
+
+      console.log("data from loadTasks", data);
+      console.log("error from loadTasks", error);
 
       if (error) throw error;
 

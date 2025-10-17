@@ -21,6 +21,12 @@ import { CapitalizeFirstPipe } from "../../../shared/pipes/capitalize-first.pipe
       } @else { @for (leave of leaveService.leaves(); track leave.id) {
       <div class="leave-item">
         <div class="leave-header">
+          <h4>
+            {{ leave.leave_type | capitalizeFirst }} Leave
+            <span *ngIf="authService.isAdmin()" class="by-user">
+              — {{ leave.profile?.full_name || "Unknown User" }}
+            </span>
+          </h4>
           <h4>{{ leave.leave_type | capitalizeFirst }} Leave</h4>
           <span
             class="status"
