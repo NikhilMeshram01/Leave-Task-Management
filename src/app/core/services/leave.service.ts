@@ -15,36 +15,6 @@ export class LeaveService {
     private authService: AuthService
   ) {}
 
-  // async loadLeaves() {
-  //   this.isLoading.set(true);
-
-  //   try {
-  //     const user = this.authService.currentUser();
-
-  //     if (!user) throw new Error("User not logged in");
-
-  //     let query = this.supabase.client
-  //       .from("leaves")
-  //       .select("*")
-  //       .order("created_at", { ascending: false });
-
-  //     // ✅ Only admins can see all leaves
-  //     if (user.role !== "admin") {
-  //       query = query.eq("user_id", user.id);
-  //     }
-
-  //     const { data, error } = await query;
-
-  //     if (error) throw error;
-
-  //     this.leaves.set(data as Leave[]);
-  //   } catch (error) {
-  //     console.error("Error loading leaves:", error);
-  //   } finally {
-  //     this.isLoading.set(false);
-  //   }
-  // }
-
   async loadLeaves() {
     this.isLoading.set(true);
     console.log("loadLeaves");
