@@ -1,11 +1,9 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
     preset: 'jest-preset-angular',
-    testEnvironment: 'jsdom',
     setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-    transform: {
-        '^.+\\.(ts|js|html)$': 'ts-jest',
-    },
-    moduleFileExtensions: ['ts', 'html', 'js', 'json'],
+    testEnvironment: 'jsdom',
+    moduleFileExtensions: ['ts', 'js', 'html'],
     testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+    transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$|@angular|rxjs)'],
 };

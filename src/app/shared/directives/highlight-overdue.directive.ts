@@ -1,20 +1,17 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 
 @Directive({
-  selector: '[appHighlightOverdue]',
-  standalone: true
+  selector: "[appHighlightOverdue]",
+  standalone: true,
 })
 export class HighlightOverdueDirective implements OnInit {
   @Input() appHighlightOverdue: string | null = null;
-  @Input() taskStatus: string = '';
+  @Input() taskStatus: string = "";
 
-  constructor(
-    private el: ElementRef,
-    private renderer: Renderer2
-  ) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
-    if (!this.appHighlightOverdue || this.taskStatus === 'completed') {
+    if (!this.appHighlightOverdue || this.taskStatus === "completed") {
       return;
     }
 
@@ -23,8 +20,12 @@ export class HighlightOverdueDirective implements OnInit {
     today.setHours(0, 0, 0, 0);
 
     if (dueDate < today) {
-      this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', '#fee');
-      this.renderer.setStyle(this.el.nativeElement, 'borderLeft', '4px solid #dc2626');
+      this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "#fee");
+      this.renderer.setStyle(
+        this.el.nativeElement,
+        "borderLeft",
+        "4px solid #dc2626"
+      );
     }
   }
 }

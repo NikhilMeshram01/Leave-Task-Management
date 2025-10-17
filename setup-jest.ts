@@ -1,12 +1,14 @@
-import "zone.js/dist/zone"; // Required by Angular
-import "zone.js/dist/zone-testing";
+import "zone.js";
+import "zone.js/testing";
 import { TestBed } from "@angular/core/testing";
-import {
-  BrowserTestingModule,
-  platformBrowserTesting,
-} from "@angular/platform-browser/testing";
+import { BrowserModule } from "@angular/platform-browser";
 
-TestBed.initTestEnvironment(BrowserTestingModule, platformBrowserTesting());
-
-// Optional for Supabase
-(global as any).Buffer = (global as any).Buffer || require("buffer").Buffer;
+// Simple test environment setup
+TestBed.initTestEnvironment(BrowserModule, {
+  platform: () =>
+    ({
+      injector: {
+        get: () => ({}),
+      },
+    } as any),
+} as any);
