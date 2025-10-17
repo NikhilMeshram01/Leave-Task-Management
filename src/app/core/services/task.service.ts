@@ -28,10 +28,20 @@ export class TaskService {
     console.log("loadTasks");
 
     try {
-      const { data, error } = await this.supabase.client
+      const user = this.authService.currentUser();
+      if (!user) throw new Error("User not logged in");
+
+      let query = this.supabase.client
         .from("tasks")
         .select("*")
         .order("created_at", { ascending: false });
+
+      // ✅ Non-admin users can see only their own tasks
+      if (user.role !== "admin") {
+        query = query.eq("user_id", user.id);
+      }
+
+      const { data, error } = await query;
 
       console.log("data from loadTasks", data);
       console.log("error from loadTasks", error);
