@@ -22,6 +22,7 @@ export class TaskService {
     private authService: AuthService
   ) {}
 
+  // done
   async loadTasks() {
     this.isLoading.set(true);
     console.log("loadTasks");
@@ -56,6 +57,7 @@ export class TaskService {
     }
   }
 
+  // done
   async createTask(taskData: CreateTaskDto) {
     const user = this.authService.currentUser();
     if (!user) return;
@@ -87,6 +89,7 @@ export class TaskService {
     }
   }
 
+  // mark as completed or pending DONE
   async updateTask(id: string, updates: UpdateTaskDto) {
     this.isLoading.set(true);
 
@@ -112,6 +115,7 @@ export class TaskService {
     }
   }
 
+  // done
   async deleteTask(id: string) {
     this.isLoading.set(true);
 
@@ -133,11 +137,13 @@ export class TaskService {
     }
   }
 
+  // done
   setFilter(filter: TaskFilter) {
     this.currentFilter.set(filter);
     this.applyFilter(filter);
   }
 
+  // done
   private applyFilter(filter: TaskFilter) {
     const allTasks = this.tasks();
 

@@ -15,6 +15,7 @@ export class LeaveService {
     private authService: AuthService
   ) {}
 
+  // done
   async loadLeaves() {
     this.isLoading.set(true);
     console.log("loadLeaves");
@@ -55,6 +56,7 @@ export class LeaveService {
     }
   }
 
+  // done
   async createLeave(leaveData: CreateLeaveDto) {
     const user = this.authService.currentUser();
     if (!user) return;
