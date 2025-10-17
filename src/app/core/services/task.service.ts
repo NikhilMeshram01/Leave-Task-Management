@@ -22,30 +22,7 @@ export class TaskService {
     private authService: AuthService
   ) {}
 
-  // async loadTasks() {
-  //   this.isLoading.set(true);
-  //   console.log("loadTasks");
-
-  //   try {
-  //     const { data, error } = await this.supabase.client
-  //       .from("tasks")
-  //       .select("*")
-  //       .order("created_at", { ascending: false });
-
-  //     console.log("data from loadTasks", data);
-  //     console.log("error from loadTasks", error);
-
-  //     if (error) throw error;
-
-  //     this.tasks.set(data as Task[]);
-  //     this.applyFilter(this.currentFilter());
-  //   } catch (error) {
-  //     console.error("Error loading tasks:", error);
-  //   } finally {
-  //     this.isLoading.set(false);
-  //   }
-  // }
-
+  // done
   async loadTasks() {
     this.isLoading.set(true);
     console.log("loadTasks");
@@ -80,6 +57,7 @@ export class TaskService {
     }
   }
 
+  // done
   async createTask(taskData: CreateTaskDto) {
     const user = this.authService.currentUser();
     if (!user) return;
@@ -111,6 +89,7 @@ export class TaskService {
     }
   }
 
+  // mark as completed or pending DONE
   async updateTask(id: string, updates: UpdateTaskDto) {
     this.isLoading.set(true);
 
@@ -136,6 +115,7 @@ export class TaskService {
     }
   }
 
+  // done
   async deleteTask(id: string) {
     this.isLoading.set(true);
 
@@ -157,11 +137,13 @@ export class TaskService {
     }
   }
 
+  // done
   setFilter(filter: TaskFilter) {
     this.currentFilter.set(filter);
     this.applyFilter(filter);
   }
 
+  // done
   private applyFilter(filter: TaskFilter) {
     const allTasks = this.tasks();
 
